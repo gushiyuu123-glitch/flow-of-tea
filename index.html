@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Flow of Tea — 静けさ × 温度 × 和モダン</title>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+  <!-- 背景湯気 -->
+  <canvas id="steam"></canvas>
+<!-- 🍃 Floating Leaves -->
+<div class="leaf-bg left"></div>
+<div class="leaf-bg left delay1"></div>
+<div class="leaf-bg left delay2"></div>
+
+<div class="leaf-bg right"></div>
+<div class="leaf-bg right delay3"></div>
+<div class="leaf-bg right delay4"></div>
+
+<div class="leaf-bg2 left"></div>
+<div class="leaf-bg2 left delay1"></div>
+<div class="leaf-bg2 left delay2"></div>
+
+<div class="leaf-bg2 right"></div>
+<div class="leaf-bg2 right delay3"></div>
+<div class="leaf-bg2 right delay4"></div>
+
+  <!-- 音声トグル -->
+  <div id="sound-toggle" class="inactive">クリックで音楽が流れます</div>
+
+  <!-- ナビゲーション -->
+  <nav class="side-nav" aria-label="セクションナビゲーション">
+    <ul>
+      <li><a href="#aroma">香る</a></li>
+      <li><a href="#pour">注ぐ</a></li>
+      <li><a href="#taste">味わう</a></li>
+      <li><a href="#calm">静まる</a></li>
+    </ul>
+  </nav>
+
+  <!-- コンテンツ -->
+  <main class="content">
+
+    <header class="hero fade-in" role="banner">
+      <video id="hero-bg" autoplay muted loop playsinline>
+        <source src="/assets/tea-bg.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-inner">
+        <div class="hero-title">
+          <h1>The Flow of Tea</h1>
+          <p>静けさ × 温度 × 和モダン</p>
+        </div>
+        <div class="hero-vertical">
+          <span class="vertical-text">茶 の 所 作 は <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;時 間 を 整 え る。</span>
+        </div>
+      </div>
+    </header>
+
+    <section id="aroma" class="panel fade-in">
+      <div class="panel-copy">
+        <h2>香る — Aroma</h2>
+        <p>茶葉が空気と出会い、ふわりと立ちのぼる香り。<br>その最初の一呼吸が、今日の時間を決める。</p>
+      </div>
+    </section>
+
+    <section id="pour" class="panel fade-in">
+      <div class="panel-media right">
+        <img src="assets/sosogu.jpg" alt="湯を注ぐ所作">
+      </div>
+      <div class="panel-copy">
+        <h2>注ぐ — Pour</h2>
+        <p>湯と茶が混ざる儀式。<br>余白のなかに、やわらかな温度が満ちていく。</p>
+      </div>
+    </section>
+
+    <section id="taste" class="panel fade-in">
+      <div class="panel-media">
+        <img src="assets/tyaba.jpg" alt="湯呑と湯気">
+      </div>
+      <div class="panel-copy">
+        <h2>味わう — Taste</h2>
+        <p>舌の上にひろがる、草いきれと甘みの余韻。<br>一口ごとに、世界がやさしくなる。</p>
+      </div>
+    </section>
+
+    <section id="calm" class="panel fade-in">
+      <div class="panel-media right">
+        <img src="assets/wasitu.jpg" alt="静かな和室の茶器">
+      </div>
+      <div class="panel-copy">
+        <h2>静まる — Silence</h2>
+        <p>茶が冷め、心がととのう。<br>静けさの中にだけ、真の温かさは宿る。</p>
+      </div>
+    </section>
+    
+<section class="cta fade-in" id="contact">
+  <div class="cta-inner">
+    <h2>この一杯の余韻を、あなたの日常にも。</h2>
+    <p>
+      季節ごとに変わる香りと味わいをお届けしています。<br>
+      ご購入やお取り扱いについては、下記よりお問い合わせください。
+    </p>
+    <a href="mailto:info@theflowoftea.jp" class="cta-btn">お問い合わせはこちら</a>
+  </div>
+</section>
+
+    <footer class="footer">
+      <small>© 2025 The Flow of Tea</small>
+    </footer>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
