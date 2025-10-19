@@ -1,10 +1,19 @@
+/* ============================================
+   🌸 Flow of Tea — Clean Version
+   Design by Yuto Gushiken × Noa
+   ============================================ */
+
 /* ===== Reset & Base ===== */
-* {margin:0;padding:0;box-sizing:border-box;}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
   background: #f6f5f1;
   color: #2b2b2b;
-  font-family: "Shippori Mincho B1","Poppins",serif;
+  font-family: "Shippori Mincho B1", "Poppins", serif;
   line-height: 1.8;
   overflow-x: hidden;
 }
@@ -13,25 +22,32 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03), transparent 70%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03), transparent 70%);
   animation: breathe 10s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
 }
 
 @keyframes breathe {
-  0%, 100% { transform: scale(1); opacity: 0.5; }
-  50% { transform: scale(1.02); opacity: 0.65; }
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1.02);
+    opacity: 0.65;
+  }
 }
-#aroma { max-width: 1400px; margin: 100px auto; }
-#pour { max-width: 1600px; margin: 100px auto; }
-#taste { max-width: 1200px; margin: 100px auto; }
-#calm { max-width: none; }
-/* ===== 背景湯気 ===== */
+
+/* ===== 背景湯気 Canvas ===== */
 #steam {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
   pointer-events: none;
 }
@@ -45,80 +61,45 @@ body::before {
   list-style: none;
   z-index: 10;
 }
-.side-nav ul {padding:0;}
-.side-nav a {
-  display:block;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  margin:1.5rem 0;
-  font-size:0.85rem;
-  letter-spacing:0.15em;
-  color:#555;
-  text-decoration:none;
-  transition:color 0.3s;
-}
-.side-nav a.active,
-.side-nav a:hover {color:#b89c5c;}
 
-/* ===== 本文 ===== */
-.content {
-  position: relative;
-  z-index: 5;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
+.side-nav a {
+  display: block;
+  writing-mode: vertical-rl;
+  margin: 1.5rem 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: #555;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.side-nav a.active,
+.side-nav a:hover {
+  color: #b89c5c;
 }
 
 /* ===== Hero ===== */
 .hero {
   position: relative;
-  min-height: 90vh; /* ← 100vhだと余白が広すぎる */
-  
+  min-height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
 
-.hero-title {
-  position: absolute; /* ← relative じゃなく absolute に変更 */
-  top: 100%;           /* ← ここで上下位置を自由に制御できるようになる */
-  left: -110%;
-  transform: translateY(-50%);
-  z-index: 2;
-}
-
-
 #hero-bg {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 0;
-  opacity: 0.78; /* 少し透かすと文字が立つ */
+  opacity: 0.78;
   filter: brightness(0.96) contrast(1.08) saturate(1.05);
   transition: opacity 2s ease;
+  z-index: 0;
 }
 
-.hero-title, .hero-vertical {
-  position: relative;
-  z-index: 2;
-}
-.hero-title h1 {
-  animation: floatTitle 8s ease-in-out infinite alternate;
-}
-
-@keyframes floatTitle {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-6px); }
-}
-
-.hero p {
-  color: #e8e0cf;
-}
 .hero-vertical {
   position: absolute;
   right: 3%;
@@ -129,119 +110,11 @@ body::before {
   font-family: "Shippori Mincho B1", serif;
   font-size: 1rem;
   letter-spacing: 0.3em;
-  color: rgba(255, 255, 255, 0.85); /* ← 少し濃くする */
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.25); /* ← 光の中でも読める */
-  opacity: 0.95;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
 }
 
-/* ===== Section ===== */
-
-.panel {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 3rem;               /* ← 広すぎたら調整 */
-  margin: 6rem 0;          /* ← セクションの縦余白も調整 */
-}
-
-.panel-media {
-  flex: 1.2;               /* ← 画像をやや大きめに */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.panel-media img {
-  width: 100%;
-  max-width: none;        
-  height: auto;
-  border-radius: 10px;
-  object-fit: cover;
-  display: block;
-  filter: brightness(1.02) contrast(1.03); /* ←少し整えるとより上品 */
-}
-@media (max-width: 900px) {
-  .panel {
-    flex-direction: column;
-    gap: 2rem;
-  }
-  .panel-media img {
-    max-width: 100%;
-    width: 100%;
-    height: auto;
-  }
-}
-
-.panel-copy {flex:1;}
-.panel-copy h2 {
-  font-size:1.8rem;
-  color:#1c1c1c;
-  margin-bottom:1rem;
-}
-.panel-copy p {
-  font-size:1rem;
-  color:#444;
-  line-height:2;
-}
-.panel-media.right {order:2;}
-
-/* ===== フッター ===== */
-.footer {
-  text-align:center;
-  color:#777;
-  font-size:.85rem;
-  margin-top:6rem;
-  padding-bottom:2rem;
-}
-
-/* ===== フェード ===== */
-.fade-in {
-  opacity:0;
-  transform:translateY(20px);
-  transition:opacity 1.4s ease, transform 1.4s ease;
-}
-.fade-in.show {
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* ===== Responsive ===== */
-@media (max-width:900px){
-  .panel{flex-direction:column;}
-  .side-nav{left:10px;}
-  .hero{flex-direction:column;text-align:center;}
-  .hero-vertical{display:none;}
-}
-/* === Aroma Section === */
-#aroma {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(to bottom, #f8f5ee 0%, #f3efe5 100%);
-  padding: 10rem 2rem;
-  text-align: center;
-}
-#aroma h2 {
-  font-size: 2rem;
-  letter-spacing: 0.1em;
-  color: #4a3f2f;
-  margin-bottom: 1.5rem;
-}
-#aroma p {
-  color: #665d4a;
-  font-size: 1.1rem;
-  line-height: 2;
-}
-#aroma-bg {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
-#aroma .panel-copy {
-  position: relative;
-  z-index: 2;
-}
+/* ===== 音声トグル ===== */
 #sound-toggle {
   position: fixed;
   bottom: 2rem;
@@ -250,16 +123,15 @@ body::before {
   color: #2e2a20;
   font-family: "Poppins", "Shippori Mincho B1", sans-serif;
   font-size: 0.85rem;
-  letter-spacing: 0.05em;
   padding: 0.6rem 1.2rem;
   border-radius: 999px;
   backdrop-filter: blur(8px);
-  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
   z-index: 1000;
   cursor: pointer;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 1s ease, transform 1s ease, background 0.4s;
+  transition: all 0.8s ease;
 }
 
 #sound-toggle.show {
@@ -269,335 +141,273 @@ body::before {
 
 #sound-toggle.active {
   background: rgba(255, 255, 255, 0.55);
-  color: #2b2b2b;
 }
 
-#sound-toggle:hover {
-  background: rgba(255, 255, 255, 0.6);
+/* ===== Section ===== */
+/* ===== Section（修正版） ===== */
+.panel {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* ← 左右の間を詰める（space-between禁止） */
+  gap: 2rem; /* ← 画像と文章の間の自然な距離 */
+  margin: 6rem auto;
+  max-width: 1100px; /* ← 少しだけ詰めると全体が締まる */
+  padding: 0 1rem; /* ← 左右余白を少し狭く */
 }
-/* === Aroma Section === */
+
+
+.panel-media img {
+  width: 100%;
+  max-width: 520px;
+  /* ← これで写真のサイズ上限を設定 */
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(1.02) contrast(1.03);
+  transition: all 2s ease;
+  margin-left: -1rem; /* ← 画像を軽く左に寄せて整える */
+}
+
+.panel-copy {
+  flex: 1;
+  max-width: 520px;
+  /* ← テキスト幅もそろえる */
+}
+
+.panel-copy h2 {
+  font-size: 1.8rem;
+  color: #1c1c1c;
+  margin-bottom: 1rem;
+}
+
+.panel-copy p {
+  font-size: 1rem;
+  color: #444;
+  line-height: 2;
+}
+/* ===== Aroma Section（中央寄せ + 和紙テクスチャ） ===== */
 #aroma {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(to bottom, #f8f5ee 0%, #f3efe5 100%);
+  background: linear-gradient(to bottom, #faf8f3 0%, #f2ede3 100%);
   padding: 10rem 2rem;
   text-align: center;
+  transition: background 3s ease;
 }
 
-#aroma h2 {
-  font-size: 2rem;
-  letter-spacing: 0.1em;
-  color: #4a3f2f;
-  margin-bottom: 1.5rem;
-}
-
-#aroma p {
-  color: #665d4a;
-  font-size: 1.1rem;
-  line-height: 2;
-}
-
-#aroma-bg {
+/* 🌿 背景に和紙テクスチャを追加 */
+#aroma::before {
+  content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
+  background:
+    url("/assets/washi-texture.png") repeat center / 600px auto,
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.3), rgba(250,247,240,0.6));
+  opacity: 0.35;
+  mix-blend-mode: multiply;
   z-index: 0;
   pointer-events: none;
-  opacity: 0;
-  transition: opacity 2.5s ease;
-}
-#aroma-bg canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
 }
 
-#aroma.active #aroma-bg {
-  opacity: 1;
-}
-
-#aroma .panel-copy {
+/* 🌸 コンテンツ中央寄せ */
+#aroma .panel {
   position: relative;
-  z-index: 2;
-}
-#aroma.active {
-  background: linear-gradient(to bottom, #f8f5ee 0%, #ece5d8 100%);
-  transition: background 3s ease;
-}
-#aroma {
-  position: relative;
-  background: linear-gradient(to bottom, #f9f7f2 0%, #f2ede3 100%);
-  padding: 10rem 2rem;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  max-width: 800px;
+  margin: 0 auto;
   text-align: center;
-  transition: background 3s ease;
 }
-#aroma.active {
-  background: linear-gradient(to bottom, #f8f2e4 0%, #f1e8d7 100%);
+
+/* 🌸 画像 */
+#aroma .panel-media img {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 10px;
+  object-fit: cover;
+  filter: brightness(1.03) contrast(1.04);
+  transition: all 1.6s ease;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.05);
 }
-#aroma h2, #aroma p {
+
+/* 🌸 テキスト部分 */
+#aroma .panel-copy {
+  max-width: 640px;
+  margin: 0 auto;
+  transform: translateY(-20px);
+}
+
+#aroma .panel-copy h2 {
+  font-size: 2.1rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 1.2rem;
+  background: linear-gradient(to bottom, #3c2f24 10%, #bfa76f 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#aroma .panel-copy p {
+  color: #5a4a35;
+  font-size: 1.1rem;
+  line-height: 2.2;
+  opacity: 0.9;
+}
+
+/* 🌸 フェードアニメーション */
+#aroma h2, #aroma p, #aroma img {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 1.6s ease, transform 1.6s ease;
 }
-#aroma.active h2, #aroma.active p {
+#aroma.active h2, #aroma.active p, #aroma.active img {
   opacity: 1;
   transform: translateY(0);
 }
 
-#pour img {
-  filter: brightness(1.05) blur(0.3px);
-  transition: filter 1.5s ease;
-}
-#pour.show img {
-  filter: brightness(1.15) blur(0);
-}
+/* ===== Pour Section ===== */
 #pour {
   position: relative;
   overflow: hidden;
 }
-#pour img {
-  filter: brightness(0.9) blur(2px);
-  transition: filter 2s ease, transform 2s ease;
-  transform: scale(1.02);
+#pour .panel-copy {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important;
+  max-width: 520px;
+  transform: translateX(12px); /* ← テキスト全体を右へ寄せる。数値は8〜20pxで調整 */
 }
-#pour.show img {
-  filter: brightness(1.1) blur(0);
-  transform: scale(1);
-}
-#pour::before {
-  content: "";
-  position: absolute;
-  top: 0; left: -100%;
-  width: 100%; height: 100%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.3), transparent 60%);
-  transition: left 2.5s ease;
-  pointer-events: none;
-}
-#pour.show::before { left: 100%; }
-#pour {
-  position: relative;
-  overflow: hidden;
-}
-#pour img {
-  filter: brightness(0.9) blur(2px);
-  transition: filter 2s ease, transform 2s ease;
-  transform: scale(1.02);
-}
-#pour.show img {
-  filter: brightness(1.1) blur(0);
-  transform: scale(1);
-}
-#pour::before {
-  content: "";
-  position: absolute;
-  top: 0; left: -100%;
-  width: 100%; height: 100%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.3), transparent 60%);
-  transition: left 2.5s ease;
-  pointer-events: none;
-}
-#pour.show::before { left: 100%; }
 
-#taste {
-  background: linear-gradient(to bottom, #f3efe5, #f5e8d0);
-  transition: background 3s ease;
+#pour img {
+  filter: brightness(0.9) blur(2px);
+  transform: scale(1.02);
+  transition: all 2s ease;
+  width: auto;
 }
-#taste {
-  background: linear-gradient(to bottom, #f3efe5, #f5e8d0);
-  transition: background 3s ease;
+
+#pour.show img {
+  filter: brightness(1.1) blur(0);
+  transform: scale(1);
 }
+
+#pour::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.3), transparent 60%);
+  transition: left 2.5s ease;
+  pointer-events: none;
+}
+
+#pour.show::before {
+  left: 100%;
+}
+
+/* ===== Taste Section（安定反転版）===== */
 #taste {
-  position: relative;
-  background: linear-gradient(to bottom, #f3efe5, #f5e8d0);
   text-align: center;
+  background: linear-gradient(to bottom, #f3efe5, #f5e8d0);
   transition: background 4s ease;
 }
+
 #taste.active {
   background: linear-gradient(to bottom, #f5ead5, #f8e1b0);
 }
-#taste h2, #taste p {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 2s ease, transform 2s ease;
-}
-#taste.active h2, #taste.active p {
-  opacity: 1;
-  transform: translateY(0);
+
+#taste .panel {
+  display: flex !important;
+  flex-direction: row-reverse !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0; /* ← 隙間を完全になくす */
+  max-width: 1100px;
+  margin: 6rem auto;
+  padding: 0; /* ← 横の余白も削除 */
 }
 
+/* 🍵 画像側 */
+#taste .panel-media {
+  order: 2;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end; /* ← 右端まで寄せる */
+}
+#taste .panel-media img {
+  max-width: auto;
+  object-fit: cover;
+  display: block;
+  margin: 0;
+  transform: translateX(20px); /* ← 微調整でカードに密着 */
+  transition: all 1.2s ease;
+}
+/* 🌸 テキスト側（左） */
+#taste .panel-copy {
+  order: 1;
+  flex: 1;
+  max-width: 520px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  transform: translateY(-10px);
+}
+
+#taste .panel-copy h2 {
+  font-size: 2.1rem;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.1em;
+  background: linear-gradient(to bottom, #3c2f24 10%, #bfa76f 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#taste .panel-copy p {
+  color: #5a4a35;
+  font-size: 1.1rem;
+  line-height: 2.2;
+  opacity: 0.9;
+}
+
+/* ===== Calm Section ===== */
 #calm {
   background: linear-gradient(to bottom, #f5e8d0, #e8e4d9, #dcd8cf);
   color: #3a362f;
-}
-#calm {
-  background: linear-gradient(to bottom, #f5e8d0, #e8e4d9, #dcd8cf);
   text-align: center;
-  filter: brightness(1);
-  transition: filter 5s ease, background 5s ease;
+  transition: all 5s ease;
 }
+
 #calm.active {
   filter: brightness(0.8);
   background: linear-gradient(to bottom, #eae6de, #dcd8cf, #d1ccc3);
 }
-#calm h2, #calm p {
+
+#calm h2,
+#calm p {
   opacity: 0;
   transition: opacity 3s ease;
 }
-#calm.active h2, #calm.active p {
+
+#calm.active h2,
+#calm.active p {
   opacity: 1;
 }
-/* === Aroma WebGL layer === */
-#aroma { position: relative; }
-#aroma-bg { z-index: 5 !important; }
-#aroma .panel-copy { z-index: 10; }
-#aroma-bg canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-#leaf-bg, canvas[data-engine="three.js"] {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-/* === 🍃 Floating Leaves Background (常時ループ＋風流モーション) === */
-.leaf-bg {
-  position: fixed;
-  top: -200px;
-  width: 260px;
-  height: 260px;
-  background: url("/assets/leaf.png") no-repeat center/contain;
-  opacity: 0.30; /* ←葉っぱを少しハッキリ見せたい時 */
-  pointer-events: none;
-  z-index: 1;
-  filter: blur(0.5px) brightness(0.95);
-  transform-origin: center;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
-.leaf-bg2 {
-  position: fixed;
-  top: -200px;
-  width: 150px;
-  height: 150px;
-  background: url("/assets/leaf2.png") no-repeat center/contain;
-  opacity: 0.30; /* ←葉っぱを少しハッキリ見せたい時 */
-  pointer-events: none;
-  z-index: 1;
-  filter: blur(0.5px) brightness(0.95);
-  transform-origin: center;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
 
-/* === 左右 === */
-.leaf-bg.left {
-  left: 5%;
-  animation-name: fallLeft;
-  animation-duration: 33s;
-}
-.leaf-bg.right {
-  right: 5%;
-  animation-name: fallRight;
-  animation-duration: 32s;
-}
-
-/* === 左右 === */
-.leaf-bg2.left {
-  left: 5%;
-  animation-name: fallLeft;
-  animation-duration: 22s;
-}
-.leaf-bg2.right {
-  right: 5%;
-  animation-name: fallRight;
-  animation-duration: 21s;
-}
-
-
-/* 修正版（頻度↓、落ちる間隔を広げる） */
-.delay1 { animation-delay: 8s; }
-.delay2 { animation-delay: 15s; }
-.delay3 { animation-delay: 11s; }
-.delay4 { animation-delay: 18s; }
-
-/* === 落下＋風の流れ === */
-@keyframes fallLeft {
-  0% {
-    top: -200px;
-    transform: rotateZ(-8deg) translateX(0);
-    opacity: 0;
-  }
-  5% { opacity: 0.25; }
-  20% {
-    transform: rotateZ(10deg) translateX(40px);   /* → 風に押されて右へ */
-  }
-  40% {
-    transform: rotateZ(-12deg) translateX(-60px); /* ← 谷：戻される */
-  }
-  60% {
-    transform: rotateZ(15deg) translateX(45px);   /* → また右へ戻る */
-  }
-  80% {
-    transform: rotateZ(-10deg) translateX(-35px); /* ← 最後の返し */
-  }
-  100% {
-    top: 110vh;
-    transform: rotateZ(8deg) translateX(20px);
-    opacity: 0;
-  }
-}
-
-@keyframes fallRight {
-  0% {
-    top: -200px;
-    transform: rotateZ(8deg) translateX(0);
-    opacity: 0;
-  }
-  5% { opacity: 0.25; }
-  20% {
-    transform: rotateZ(-10deg) translateX(-40px); /* ← 風で左へ */
-  }
-  40% {
-    transform: rotateZ(12deg) translateX(60px);   /* → 谷：右へ反転 */
-  }
-  60% {
-    transform: rotateZ(-15deg) translateX(-45px); /* ← 再び左へ */
-  }
-  80% {
-    transform: rotateZ(10deg) translateX(35px);   /* → 最後のゆらぎ */
-  }
-  100% {
-    top: 110vh;
-    transform: rotateZ(-8deg) translateX(-20px);
-    opacity: 0;
-  }
-}
+/* ===== CTA ===== */
 .cta {
   background: linear-gradient(to bottom, #f3efe5, #ece8de);
   text-align: center;
   padding: 8rem 2rem;
   color: #3b3328;
-  border-top: 1px solid rgba(0,0,0,0.05);
-  position: relative;
-  overflow: hidden;
-}
-
-.cta::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: url("/assets/leaf2.png") no-repeat 80% 20% / 120px,
-              url("/assets/leaf.png") no-repeat 15% 80% / 160px;
-  opacity: 0.05;
-  pointer-events: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .cta h2 {
-  font-family: "Shippori Mincho B1", serif;
   font-size: 1.5rem;
   letter-spacing: 0.12em;
   margin-bottom: 1.5rem;
@@ -618,14 +428,375 @@ body::before {
   padding: 0.9rem 2.2rem;
   border-radius: 999px;
   text-decoration: none;
-  font-family: "Poppins", sans-serif;
   letter-spacing: 0.1em;
-  font-size: 0.95rem;
   transition: all 0.4s ease;
 }
 
 .cta-btn:hover {
   background: #a78b50;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* ===== 右サイド記事リスト ===== */
+.side-articles {
+  position: fixed;
+  top: 220px;
+  /* ← Heroとの距離バランス最適化 */
+  right: 40px;
+  width: 320px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 1.6rem 1.4rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+  font-family: "Shippori Mincho B1", serif;
+  z-index: 100;
+}
+
+.side-articles h3 {
+  font-size: 1.1rem;
+  color: #7c6a50;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+#side-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.side-article {
+  border-left: 3px solid rgba(160, 140, 100, 0.2);
+  padding-left: 0.6rem;
+  transition: all 0.3s ease;
+}
+
+.side-article:hover {
+  transform: translateX(-2px);
+  border-left-color: rgba(160, 140, 100, 0.4);
+}
+
+.side-article h4 {
+  font-size: 0.95rem;
+  color: #3b3228;
+  margin-bottom: 0.3rem;
+}
+
+.side-article p {
+  font-size: 0.8rem;
+  color: #5a5143;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+#side-load-more {
+  display: block;
+  margin: 1.5rem auto 0;
+  padding: 0.4rem 1.6rem;
+  background: #e8e4dc;
+  border: none;
+  border-radius: 50px;
+  font-family: "Shippori Mincho B1", serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  color: #5a4a35;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#side-load-more:hover {
+  background: #d9d2c2;
+  transform: translateY(-2px);
+}
+
+/* ===== アニメーション ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1.4s ease;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .panel {
+    flex-direction: column;
+  }
+
+  .side-nav {
+    left: 10px;
+  }
+
+  .hero-vertical {
+    display: none;
+  }
+
+  .side-articles {
+    position: static;
+    transform: none;
+    width: 90%;
+    margin: 3rem auto;
+  }
+}
+
+/* ===== Journal Card（修正版） ===== */
+.journal-list {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 760px;
+  /* ← 少し締めて上品に */
+  margin: 0 auto;
+}
+
+.journal-list article {
+  background: #fffefb;
+  padding: 1.6rem 2rem;
+  /* ← 適正サイズに戻す */
+  border-radius: 0px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid rgba(160, 140, 100, 0.25);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1.2s ease;
+}
+
+/* ============================================
+   🍃 Floating Leaves Background (再追加)
+   ============================================ */
+.leaf-bg,
+.leaf-bg2 {
+  position: fixed;
+  top: -200px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.25;
+  filter: blur(0.5px) brightness(0.95);
+  transform-origin: center;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* 🍃 葉の種類別 */
+.leaf-bg {
+  width: 260px;
+  height: 260px;
+  background: url("/assets/leaf.png") no-repeat center/contain;
+}
+
+.leaf-bg2 {
+  width: 150px;
+  height: 150px;
+  background: url("/assets/leaf2.png") no-repeat center/contain;
+}
+
+/* 🍂 左右の風向き */
+.leaf-bg.left {
+  left: 5%;
+  animation: fallLeft 33s infinite;
+}
+
+.leaf-bg.right {
+  right: 5%;
+  animation: fallRight 32s infinite;
+}
+
+.leaf-bg2.left {
+  left: 5%;
+  animation: fallLeft 22s infinite;
+}
+
+.leaf-bg2.right {
+  right: 5%;
+  animation: fallRight 21s infinite;
+}
+
+/* 🍂 ランダム遅延（自然な流れ） */
+.delay1 {
+  animation-delay: 8s;
+}
+
+.delay2 {
+  animation-delay: 15s;
+}
+
+.delay3 {
+  animation-delay: 11s;
+}
+
+.delay4 {
+  animation-delay: 18s;
+}
+
+/* 🍃 左風 */
+@keyframes fallLeft {
+  0% {
+    top: -200px;
+    transform: rotateZ(-8deg) translateX(0);
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 0.25;
+  }
+
+  20% {
+    transform: rotateZ(10deg) translateX(40px);
+  }
+
+  40% {
+    transform: rotateZ(-12deg) translateX(-60px);
+  }
+
+  60% {
+    transform: rotateZ(15deg) translateX(45px);
+  }
+
+  80% {
+    transform: rotateZ(-10deg) translateX(-35px);
+  }
+
+  100% {
+    top: 110vh;
+    transform: rotateZ(8deg) translateX(20px);
+    opacity: 0;
+  }
+}
+
+/* 🍃 右風 */
+@keyframes fallRight {
+  0% {
+    top: -200px;
+    transform: rotateZ(8deg) translateX(0);
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 0.25;
+  }
+
+  20% {
+    transform: rotateZ(-10deg) translateX(-40px);
+  }
+
+  40% {
+    transform: rotateZ(12deg) translateX(60px);
+  }
+
+  60% {
+    transform: rotateZ(-15deg) translateX(-45px);
+  }
+
+  80% {
+    transform: rotateZ(10deg) translateX(35px);
+  }
+
+  100% {
+    top: 110vh;
+    transform: rotateZ(-8deg) translateX(-20px);
+    opacity: 0;
+  }
+}
+
+/* ===== Hero Title (強化版) ===== */
+.hero-title {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 1.2rem 2.4rem;
+  background: rgba(0, 0, 0, 0.35);
+  /* ← 背景フィルム追加 */
+  backdrop-filter: blur(4px);
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+}
+
+.hero-title h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 3rem;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+  background: linear-gradient(to bottom, #fffdf5 0%, #e8dba5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    0 0 8px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(255, 240, 180, 0.3);
+  animation: titlePop 2s ease forwards;
+}
+
+.hero-title p {
+  font-family: "Shippori Mincho B1", serif;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1rem;
+  letter-spacing: 0.25em;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  margin-top: 0.6rem;
+}
+
+@keyframes titlePop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===== 縦ナビ（最終版） ===== */
+.side-nav {
+  position: fixed;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  list-style: none;
+  z-index: 10;
+}
+
+.side-nav a {
+  display: block;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  font-family: "Shippori Mincho B1", serif;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+
+  /* 🎨 ベース色：墨＋光 */
+  color: transparent;
+  background: linear-gradient(to bottom, #3c2f24 10%, #bfa76f 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* ☁️ 白背景でも沈まないための光影 */
+  text-shadow:
+    0 0 6px rgba(255, 255, 255, 0.4),
+    0 1px 4px rgba(0, 0, 0, 0.3);
+
+  transition: all 0.4s ease;
+}
+
+.side-nav a:hover,
+.side-nav a.active {
+  background: linear-gradient(to bottom, #e8d18a 0%, #bfa76f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    0 0 8px rgba(255, 250, 200, 0.5),
+    0 2px 6px rgba(0, 0, 0, 0.25);
+  transform: scale(1.05);
 }

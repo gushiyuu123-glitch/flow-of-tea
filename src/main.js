@@ -3,6 +3,14 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
+// ===== microCMS設定 =====
+const API_URL = "https://flow-of-tea.microcms.io/api/v1/posts";
+const API_KEY = "XnUjreowyRRQW2bXd2wh9SB7C9XHtaSSAws6";
+
+let allPosts = [];
+let displayedCount = 0;
+const perPage = 3; // 一度に表示する件数
+
 // ===== 縦ナビの現在地ハイライト =====
 const navLinks = [...document.querySelectorAll(".side-nav a")];
 const sections = navLinks.map(a => document.querySelector(a.getAttribute("href")));
@@ -20,7 +28,7 @@ const navObserver = new IntersectionObserver((entries) => {
 
 sections.forEach(sec => sec && navObserver.observe(sec));
 
-// ===== フェードイン =====
+// ===== フェードイン演出 =====
 const fades = document.querySelectorAll(".fade-in");
 const fadeObserver = new IntersectionObserver((entries) => {
   entries.forEach(e => {
@@ -29,7 +37,7 @@ const fadeObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.2 });
 fades.forEach(el => fadeObserver.observe(el));
 
-// ===== 背景：湯気（Canvas） =====
+// ===== 背景：湯気アニメーション =====
 const steamCanvas = document.getElementById("steam");
 if (steamCanvas) {
   const ctx = steamCanvas.getContext("2d", { alpha: true });
@@ -114,3 +122,53 @@ const sectionObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.05 });
 observedSections.forEach(sec => sectionObserver.observe(sec));
+
+// ===== microCMS 記事取得と右サイド表示 =====
+async function fetchPosts() {
+  try {
+    const res = await fetch(API_URL, {
+      headers: { "X-MICROCMS-API-KEY": API_KEY },
+    });
+    const data = await res.json();
+    allPosts = data.contents;
+    renderSideArticles(); // 初期表示
+  } catch (err) {
+    console.error("microCMS読み込みエラー:", err);
+  }
+}
+
+function renderSideArticles() {
+  const sideContainer = document.querySelector("#side-posts");
+  if (!sideContainer) return;
+
+  const nextPosts = allPosts.slice(displayedCount, displayedCount + perPage);
+
+  nextPosts.forEach(post => {
+    const snippet = post.body.replace(/<[^>]+>/g, "").slice(0, 28);
+    const div = document.createElement("div");
+    div.className = "side-article";
+    div.innerHTML = `
+      <h4>${post.title}</h4>
+      <p>${snippet}...</p>
+    `;
+    sideContainer.appendChild(div);
+  });
+
+  displayedCount += nextPosts.length;
+
+  // 全件表示済みならボタンを隠す
+  const btn = document.querySelector("#side-load-more");
+  if (displayedCount >= allPosts.length && btn) {
+    btn.style.opacity = "0.4";
+    btn.style.pointerEvents = "none";
+  }
+}
+
+// ===== もっと見るボタン =====
+const loadMoreBtn = document.querySelector("#side-load-more");
+if (loadMoreBtn) {
+  loadMoreBtn.addEventListener("click", renderSideArticles);
+}
+
+// ===== 初回ロード =====
+fetchPosts();
